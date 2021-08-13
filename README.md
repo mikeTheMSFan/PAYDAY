@@ -1,2 +1,2 @@
-# JsSiteTemplate
-Mini site template for JS projects.
+# PAYDAY
+When 3 meets 5 it's PAYDAY!
