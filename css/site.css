@@ -1,7 +1,7 @@
 :root {
   --primary-color: #423417;
   --secondary-color: #ecc97e;
-  --dark-color: #292929;
+  --dark-color: #003b73;
   --white-color: #dff3e4;
 }
 
@@ -23,15 +23,25 @@ h3,
 h4,
 h5,
 h6 {
-  color: var(--primary-color);
-  font-family: 'Titillium Web', sans-serif;
+  color: var(--dark-color);
+  font-family: "Titillium Web", sans-serif;
 }
 
 p,
 span,
 a {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 300;
+}
+
+.logo,
+.heading,
+.reg-num,
+.PAY,
+.DAY,
+.PAYDAY {
+  font-family: "Nanum Gothic", sans-serif;
+  font-weight: 800;
 }
 
 main > .container {
@@ -80,8 +90,20 @@ main > .container {
   color: var(--secondary-color);
 }
 
-code[class*='language-'],
-pre[class*='language-'] {
+.PAYDAY {
+  color: #0084ff;
+}
+
+.PAY {
+  color: #9fd6fd;
+}
+
+.DAY {
+  color: #13c2b3;
+}
+
+code[class*="language-"],
+pre[class*="language-"] {
   white-space: pre-wrap;
   word-break: break-all;
   word-wrap: break-word;

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="h-100">
   <head>
-    <title>AppName: A Coding Project by Michael Robinson</title>
+    <title>PAY DAY: A Coding Project by Michael Robinson</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -57,6 +57,10 @@
       href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
   <body class="d-flex flex-column h-100">
@@ -70,7 +74,7 @@
             alt="double-m icon"
             width="30"
           />
-          <span class="ps-2">APP NAME</span>
+          <span class="logo ps-2">PAY DAY</span>
         </a>
         <button
           class="navbar-toggler"
@@ -99,7 +103,7 @@
             <li class="nav-item">
               <a
                 class="nav-link"
-                href="https://github.com/mikeTheMSFan/"
+                href="https://github.com/mikeTheMSFan/PAYDAY"
                 target="_blank"
                 >Git Repo</a
               >
@@ -119,27 +123,195 @@
     <!--==== Main Section ====-->
     <main class="flex-shrink-0">
       <div class="container py-4 px-5 mt-5">
-        <h2 class="border-1 border-bottom border-dark"
-          >The Code for the APP NAME</h2
-        >
+        <h2 class="border-1 border-bottom border-dark">
+          The Code for the PAY DAY
+        </h2>
         <div class="row row-cols-1 row-cols-lg-2">
           <div class="col-lg-8">
             <pre class="line-numbers">
                   <code class="language-javascript">
-                    // Call Hello World
-                    function helloWorld() {
-                      alert('Hello World');
+                    //Get values from the user interface
+                    function getValues() {
+                      const payValue = parseInt(document.getElementById("payVal").value);
+                      const dayValue = parseInt(document.getElementById("dayVal").value);
+                      let pdArr = [];
+                    
+                      if (Number.isInteger(payValue) && Number.isInteger(dayValue)) {
+                        pdArr = generateNumbersC(payValue, dayValue);
+                        displayPayDay(pdArr);
+                      } else {
+                        alert("Please enter an integer");
+                      }
                     }
+                    
+                    //Checks to see if i is divisible by payVal and dayVal and pushes the
+                    //string "PAYDAY" to the return array if true.
+                    
+                    //Checks to see if i is divisible by payVal and pushes the
+                    //string "PAY" it to the return array if true.
+                    
+                    //Checks to see if i is divisible by dayVal and pushrs the string
+                    //"DAY" it to the return array if true.
+                    
+                    //If all checks fail, push the integer i to the array.
+                    
+                    function generateNumbers(payVal, dayVal) {
+                      const returnArr = [];
+                      for (let i = 1; i <= 100; i++) {
+                        if (i % payVal === 0 && i % dayVal === 0) {
+                          returnArr.push("PAYDAY");
+                        } else if (i % payVal === 0) {
+                          returnArr.push("PAY");
+                        } else if (i % dayVal === 0) {
+                          returnArr.push("DAY");
+                        } else {
+                          returnArr.push(i);
+                        }
+                      }
+                      return returnArr;
+                    }
+                    
+                    // Case Select Version (Cleaner look)
+                    function generateNumbersB(payVal, dayVal) {
+                      let returnArr = [];
+                      let pay = false;
+                      let day = false;
+                    
+                      for (let i = 1; i <= 100; i++) {
+                        pay = i % payVal == 0;
+                        day = i % dayVal == 0;
+                    
+                        switch (true) {
+                          case pay && day: {
+                            returnArr.push("PAYDAY");
+                            break;
+                          }
+                          case pay: {
+                            returnArr.push("PAY");
+                            break;
+                          }
+                          case day: {
+                            returnArr.push("DAY");
+                            break;
+                          }
+                          default: {
+                            returnArr.push(i);
+                            break;
+                          }
+                        }
+                      }
+                      return returnArr;
+                    }
+                    
+                    //Shortwork Version (The one to rule them all)
+                    function generateNumbersC(payVal, dayVal) {
+                      let returnArr = [];
+                    
+                      for (let i = 1; i <= 100; i++) {
+                        let value =
+                          (i % payVal === 0 ? "PAY" : "") + (i % dayVal === 0 ? "DAY" : "") || i;
+                        returnArr.push(value);
+                      }
+                      return returnArr;
+                    }
+                    
+                    //Loop over the table and create a table row for each item
+                    function displayPayDay(pdArr) {
+                      let template = "";
+                    
+                      //get the table body element
+                      const tableBody = document.getElementById("results");
+                      //get template
+                      const templateRow = document.getElementById("pdTemplate");
+                    
+                      //reset table
+                      tableBody.innerHTML = "";
+                    
+                      for (let i = 0; i < pdArr.length; i += 5) {
+                        let tableRow = document.importNode(templateRow.content, true);
+                    
+                        //Get just the td and put them into an array
+                        let rowCols = tableRow.querySelectorAll("td");
+                    
+                        rowCols[0].classList.add(pdArr[i]);
+                        rowCols[0].textContent = pdArr[i];
+                    
+                        rowCols[1].classList.add(pdArr[i + 1]);
+                        rowCols[1].textContent = pdArr[i + 1];
+                    
+                        rowCols[2].classList.add(pdArr[i + 2]);
+                        rowCols[2].textContent = pdArr[i + 2];
+                    
+                        rowCols[3].classList.add(pdArr[i + 3]);
+                        rowCols[3].textContent = pdArr[i + 3];
+                    
+                        rowCols[4].classList.add(pdArr[i + 4]);
+                        rowCols[4].textContent = pdArr[i + 4];
+                    
+                        tableBody.appendChild(tableRow);
+                      }
+                    }                    
                   </code>
               </pre>
           </div>
           <div class="col-lg-4">
-            <p>The Code is structured in one function</p>
-            <h5>Hello World</h5>
-            <p
-              >Hello World is a function that displays an alert with a message
-              called 'Hello World!'</p
-            >
+            <h5>getValues Function</h5>
+            <p>
+              This function gets the pay value and the day value from the UI.
+              Once we revieve these values. we attempt to convert them into
+              integers and check if the process was sucessful. If so, we pass
+              the values to the generateNumbers function. If not, we let the
+              user know.
+            </p>
+            <h5>generateNumbers Function</h5>
+            <p>
+              This function uses a for loop to iterate from 1 to 100, and checks
+              to see if the current number is divisible by the pay or day value.
+              First, we declare the return array to hold the values parsed by
+              the for loop. Then we check to see if ‘i’ is divisible by the pay
+              value, when true we push the string ‘PAY’ to the array. When the
+              number is divisible by the day value, we push the string ‘DAY’ to
+              the array. If the pay and day value are divisible by the number,
+              we push the string ‘PAYDAY’ to the array. Otherwise, we push ‘i’
+              to the array. Once we push all numbers to the array, we return it
+              to the caller.
+            </p>
+            <h5>generateNumbersB Function</h5>
+            <p>
+              This function shows a cleaner way to a achieve the same result as
+              the generateNumbers function. First, we declare our returnArr, and
+              we create pay and day boolean variables. As before, we iterate the
+              numbers 1 to 100 using a for loop. When either the pay value or
+              day value is divisible by the current number, we set pay and/or
+              day to true. Otherwise we set them to false. We use a switch
+              statement with the condition of true to check if pay and/or day is
+              true. If so, we push either ‘PAY’, ‘DAY’ or ‘PAYDAY.’ Otherwise,
+              we push ‘i’ to the array. When finished, we return the array to
+              the caller.
+            </p>
+            <h5>generateNumbersC Function</h5>
+            <p>
+              This function shows a concise way to achieve the same result as
+              generateNumbers and generateNumbersB. Once again, we declare a
+              return array and we set up a for loop to iterate from 1 to 100.
+              Inside of the loop, we use a ternary operator. The first operator
+              checks if the pay value is divisible by ‘i’ if so, we set the
+              value to the string ‘PAY’. If not, we set an empty string
+              (basically nothing). Then we check the day value to see if it’s
+              divisible by the current number. When true, we set the string
+              ‘DAY’ to value. When false, we set an empty string. If all checks
+              fail, we set value to ‘i.’ When we set a string, we concatenate
+              it. We either end up with (‘PAY’ + ‘’), which equals PAY, (‘DAY’ +
+              ‘’) which equals DAY, or (‘PAY’ + ‘DAY’), which equals PAYDAY.
+              Once we parse each number, we push it to the array. When finished,
+              we return the array to the caller.
+            </p>
+            <h5>displayPayDay Function</h5>
+            <p>
+              This function takes the array formed in the generateNumbers
+              function, formats it, and displays it to the user. First, we
+              declare a template variable to hold HTML that we will display.
+            </p>
           </div>
         </div>
       </div>
@@ -158,8 +330,8 @@
               mw-100
             "
           >
-            <div
-              ><span class="text-muted">&copy;2021</span>
+            <div>
+              <span class="text-muted">&copy;2021</span>
               <span
                 >&nbsp;&nbsp;Michael M. Robinson&nbsp;|&nbsp;
                 <i class="fa fa-envelope fa-1x" aria-hidden="true"></i
@@ -215,10 +387,10 @@
     <script src="./js/prism.js"></script>
     <script>
       Prism.plugins.NormalizeWhitespace.setDefaults({
-        'remove-trailing': true,
-        'remove-indent': true,
-        'left-trim': true,
-        'right-trim': true,
+        "remove-trailing": true,
+        "remove-indent": true,
+        "left-trim": true,
+        "right-trim": true,
       });
     </script>
   </body>
