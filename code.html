@@ -124,7 +124,7 @@
     <main class="flex-shrink-0">
       <div class="container py-4 px-5 mt-5">
         <h2 class="border-1 border-bottom border-dark">
-          The Code for the PAY DAY
+          The Code for the PAY DAY app
         </h2>
         <div class="row row-cols-1 row-cols-lg-2">
           <div class="col-lg-8">
@@ -132,15 +132,15 @@
                   <code class="language-javascript">
                     //Get values from the user interface
                     function getValues() {
-                      const payValue = parseInt(document.getElementById("payVal").value);
-                      const dayValue = parseInt(document.getElementById("dayVal").value);
+                      const payValue = parseInt(document.getElementById('payVal').value);
+                      const dayValue = parseInt(document.getElementById('dayVal').value);
                       let pdArr = [];
                     
                       if (Number.isInteger(payValue) && Number.isInteger(dayValue)) {
                         pdArr = generateNumbersC(payValue, dayValue);
                         displayPayDay(pdArr);
                       } else {
-                        alert("Please enter an integer");
+                        alert('Please enter an integer');
                       }
                     }
                     
@@ -159,11 +159,11 @@
                       const returnArr = [];
                       for (let i = 1; i <= 100; i++) {
                         if (i % payVal === 0 && i % dayVal === 0) {
-                          returnArr.push("PAYDAY");
+                          returnArr.push('PAYDAY');
                         } else if (i % payVal === 0) {
-                          returnArr.push("PAY");
+                          returnArr.push('PAY');
                         } else if (i % dayVal === 0) {
-                          returnArr.push("DAY");
+                          returnArr.push('DAY');
                         } else {
                           returnArr.push(i);
                         }
@@ -183,15 +183,15 @@
                     
                         switch (true) {
                           case pay && day: {
-                            returnArr.push("PAYDAY");
+                            returnArr.push('PAYDAY');
                             break;
                           }
                           case pay: {
-                            returnArr.push("PAY");
+                            returnArr.push('PAY');
                             break;
                           }
                           case day: {
-                            returnArr.push("DAY");
+                            returnArr.push('DAY');
                             break;
                           }
                           default: {
@@ -209,7 +209,7 @@
                     
                       for (let i = 1; i <= 100; i++) {
                         let value =
-                          (i % payVal === 0 ? "PAY" : "") + (i % dayVal === 0 ? "DAY" : "") || i;
+                          (i % payVal === 0 ? 'PAY' : '') + (i % dayVal === 0 ? 'DAY' : '') || i;
                         returnArr.push(value);
                       }
                       return returnArr;
@@ -217,22 +217,28 @@
                     
                     //Loop over the table and create a table row for each item
                     function displayPayDay(pdArr) {
-                      let template = "";
+                      let template = '';
                     
                       //get the table body element
-                      const tableBody = document.getElementById("results");
+                      const tableBody = document.getElementById('results');
                       //get template
-                      const templateRow = document.getElementById("pdTemplate");
+                      const templateRow = document.getElementById('pdTemplate');
                     
                       //reset table
-                      tableBody.innerHTML = "";
+                      tableBody.innerHTML = '';
                     
                       for (let i = 0; i < pdArr.length; i += 5) {
+                        //Creates a fragment or copy of template we made in HTML
                         let tableRow = document.importNode(templateRow.content, true);
                     
-                        //Get just the td and put them into an array
-                        let rowCols = tableRow.querySelectorAll("td");
+                        //Gets just the td elements and puts them into an array
+                        let rowCols = tableRow.querySelectorAll('td');
                     
+                        //Adds a class name based on the content of
+                        //the array element.
+                    
+                        //Fills 'td' array with data from the passed
+                        //in array.
                         rowCols[0].classList.add(pdArr[i]);
                         rowCols[0].textContent = pdArr[i];
                     
@@ -248,13 +254,16 @@
                         rowCols[4].classList.add(pdArr[i + 4]);
                         rowCols[4].textContent = pdArr[i + 4];
                     
+                        //Appends the filled in 'td' rows to the
+                        //HTML table.
                         tableBody.appendChild(tableRow);
                       }
-                    }                    
+                    }                                        
                   </code>
               </pre>
           </div>
           <div class="col-lg-4">
+            <h1 class="code-heading">PAY DAY</h1>
             <h5>getValues Function</h5>
             <p>
               This function gets the pay value and the day value from the UI.
@@ -308,9 +317,18 @@
             </p>
             <h5>displayPayDay Function</h5>
             <p>
-              This function takes the array formed in the generateNumbers
+              This function passes in the array formed in the generateNumbers
               function, formats it, and displays it to the user. First, we
-              declare a template variable to hold HTML that we will display.
+              declare a template variable to hold HTML that we will display. We
+              then declare a variable that allows us to use the template we’ve
+              created. Before entering the loop, we clear the table of any stale
+              data. In the loop, we create a fragment or a copy of the template
+              we’ve made. We then take that fragment and put the td elements
+              into an array named rolCols. Since the loop takes steps in
+              multiples of five, we fill in the td array in multiples of five.
+              Once we add all values to the td array, we pass the completed
+              table row to the table body as a child element, and show the
+              completed table to the user.
             </p>
           </div>
         </div>
@@ -387,10 +405,10 @@
     <script src="./js/prism.js"></script>
     <script>
       Prism.plugins.NormalizeWhitespace.setDefaults({
-        "remove-trailing": true,
-        "remove-indent": true,
-        "left-trim": true,
-        "right-trim": true,
+        'remove-trailing': true,
+        'remove-indent': true,
+        'left-trim': true,
+        'right-trim': true,
       });
     </script>
   </body>

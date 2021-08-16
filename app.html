@@ -131,6 +131,9 @@
               you've chosen are divisible by any number in the set, then PAYDAY
               will appear!
             </p>
+
+            <h2>Instructions</h2>
+            <p>Enter a 'PAY' and 'DAY' value and the numbers will appear.</p>
           </div>
           <div class="col col-xl-8">
             <form>
@@ -143,7 +146,7 @@
                     class="form-control"
                     id="payVal"
                     type="number"
-                    placeholder="Starting Value"
+                    placeholder="Pay Value"
                   />
                 </div>
                 <div class="col pt-3">
@@ -151,7 +154,7 @@
                     class="form-control"
                     id="dayVal"
                     type="number"
-                    placeholder="Ending Value"
+                    placeholder="Day Value"
                   />
                 </div>
                 <div class="col-12 pt-3 d-flex justify-content-end">
@@ -242,7 +245,7 @@
     ></script>
     <script src="/js/site.js"></script>
     <script>
-      document.getElementById("submitBtn").addEventListener("click", getValues);
+      document.getElementById('submitBtn').addEventListener('click', getValues);
     </script>
   </body>
   <template id="pdTemplate">

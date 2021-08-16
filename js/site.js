@@ -1,14 +1,14 @@
 //Get values from the user interface
 function getValues() {
-  const payValue = parseInt(document.getElementById("payVal").value);
-  const dayValue = parseInt(document.getElementById("dayVal").value);
+  const payValue = parseInt(document.getElementById('payVal').value);
+  const dayValue = parseInt(document.getElementById('dayVal').value);
   let pdArr = [];
 
   if (Number.isInteger(payValue) && Number.isInteger(dayValue)) {
     pdArr = generateNumbersC(payValue, dayValue);
     displayPayDay(pdArr);
   } else {
-    alert("Please enter an integer");
+    alert('Please enter an integer');
   }
 }
 
@@ -27,11 +27,11 @@ function generateNumbers(payVal, dayVal) {
   const returnArr = [];
   for (let i = 1; i <= 100; i++) {
     if (i % payVal === 0 && i % dayVal === 0) {
-      returnArr.push("PAYDAY");
+      returnArr.push('PAYDAY');
     } else if (i % payVal === 0) {
-      returnArr.push("PAY");
+      returnArr.push('PAY');
     } else if (i % dayVal === 0) {
-      returnArr.push("DAY");
+      returnArr.push('DAY');
     } else {
       returnArr.push(i);
     }
@@ -51,15 +51,15 @@ function generateNumbersB(payVal, dayVal) {
 
     switch (true) {
       case pay && day: {
-        returnArr.push("PAYDAY");
+        returnArr.push('PAYDAY');
         break;
       }
       case pay: {
-        returnArr.push("PAY");
+        returnArr.push('PAY');
         break;
       }
       case day: {
-        returnArr.push("DAY");
+        returnArr.push('DAY');
         break;
       }
       default: {
@@ -77,7 +77,7 @@ function generateNumbersC(payVal, dayVal) {
 
   for (let i = 1; i <= 100; i++) {
     let value =
-      (i % payVal === 0 ? "PAY" : "") + (i % dayVal === 0 ? "DAY" : "") || i;
+      (i % payVal === 0 ? 'PAY' : '') + (i % dayVal === 0 ? 'DAY' : '') || i;
     returnArr.push(value);
   }
   return returnArr;
@@ -85,22 +85,28 @@ function generateNumbersC(payVal, dayVal) {
 
 //Loop over the table and create a table row for each item
 function displayPayDay(pdArr) {
-  let template = "";
+  let template = '';
 
   //get the table body element
-  const tableBody = document.getElementById("results");
+  const tableBody = document.getElementById('results');
   //get template
-  const templateRow = document.getElementById("pdTemplate");
+  const templateRow = document.getElementById('pdTemplate');
 
   //reset table
-  tableBody.innerHTML = "";
+  tableBody.innerHTML = '';
 
   for (let i = 0; i < pdArr.length; i += 5) {
+    //Creates a fragment or copy of template we made in HTML
     let tableRow = document.importNode(templateRow.content, true);
 
-    //Get just the td and put them into an array
-    let rowCols = tableRow.querySelectorAll("td");
+    //Gets just the td elements and puts them into an array
+    let rowCols = tableRow.querySelectorAll('td');
 
+    //Adds a class name based on the content of
+    //the array element.
+
+    //Fills 'td' array with data from the passed
+    //in array.
     rowCols[0].classList.add(pdArr[i]);
     rowCols[0].textContent = pdArr[i];
 
@@ -116,6 +122,8 @@ function displayPayDay(pdArr) {
     rowCols[4].classList.add(pdArr[i + 4]);
     rowCols[4].textContent = pdArr[i + 4];
 
+    //Appends the filled in 'td' rows to the
+    //HTML table.
     tableBody.appendChild(tableRow);
   }
 }
