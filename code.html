@@ -137,7 +137,12 @@
                       let pdArr = [];
                     
                       if (Number.isInteger(payValue) && Number.isInteger(dayValue)) {
-                        pdArr = generateNumbersC(payValue, dayValue);
+                        //Checks if both values are number between 1 and 10
+                        if (payValue > 0 && payValue <= 10 && dayValue > 0 && dayValue <= 10) {
+                          pdArr = generateNumbersC(payValue, dayValue);
+                        } else {
+                          alert("Please choose a number between 1 and 10.");
+                        }
                         displayPayDay(pdArr);
                       } else {
                         alert('Please enter an integer');
@@ -268,9 +273,9 @@
             <p>
               This function gets the pay value and the day value from the UI.
               Once we revieve these values. we attempt to convert them into
-              integers and check if the process was sucessful. If so, we pass
-              the values to the generateNumbers function. If not, we let the
-              user know.
+              integers and check if the process was sucessful. If so, we check
+              the range of the number and, if appropreate, we pass the values to
+              the generateNumbers function. If not, we let the user know why.
             </p>
             <h2>generateNumbers Function</h2>
             <p>
@@ -405,10 +410,10 @@
     <script src="./js/prism.js"></script>
     <script>
       Prism.plugins.NormalizeWhitespace.setDefaults({
-        'remove-trailing': true,
-        'remove-indent': true,
-        'left-trim': true,
-        'right-trim': true,
+        "remove-trailing": true,
+        "remove-indent": true,
+        "left-trim": true,
+        "right-trim": true,
       });
     </script>
   </body>
